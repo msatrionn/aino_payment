@@ -24,12 +24,58 @@
                 aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample"
               >
-                <div class="accordion-body">
+                <div class="accordion-body get-modal">
                   <div class="payment">
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <h5
+                            class="modal-title text-amount"
+                            id="exampleModalLabel"
+                          >
+                            Credit Payment
+                          </h5>
+                          <div class="modal-body text-center">
+                            Are you sure want to pay with credit card?
+                          </div>
+                          <div
+                            class="modal-footer d-flex justify-content-center"
+                          >
+                            <button
+                              type="button"
+                              class="btn btn-secondary button-modal-no"
+                              data-bs-dismiss="modal"
+                            >
+                              No
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-primary button-modal-yes"
+                            >
+                              Yes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class=""><span class="text-payment">Ovo</span></div>
                     <div class="">
                       <img
-                        :src="require('@/assets/ovo.png')"
+                        :src="require('@/assets/ewalet/ovo.svg')"
                         class="img-payment"
                         alt=""
                       />
@@ -53,7 +99,53 @@
                     </div>
                     <div class="">
                       <img
-                        :src="require('@/assets/linkaja.png')"
+                        :src="require('@/assets/ewalet/linkaja.svg')"
+                        class="img-payment"
+                        alt=""
+                      />
+                      <span
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 320 512"
+                          class="fontawesome-size"
+                        >
+                          <path
+                            d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                          /></svg
+                      ></span>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="payment">
+                    <div class="">
+                      <span class="text-payment">Shopee Pay</span>
+                    </div>
+                    <div class="">
+                      <img
+                        :src="require('@/assets/ewalet/shopeepay.svg')"
+                        class="img-payment"
+                        alt=""
+                      />
+                      <span
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 320 512"
+                          class="fontawesome-size"
+                        >
+                          <path
+                            d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                          /></svg
+                      ></span>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="payment">
+                    <div class="">
+                      <span class="text-payment">Dana</span>
+                    </div>
+                    <div class="">
+                      <img
+                        :src="require('@/assets/ewalet/dana.svg')"
                         class="img-payment"
                         alt=""
                       />
@@ -99,10 +191,10 @@
               >
                 <div class="accordion-body">
                   <div class="payment">
-                    <div class=""><span class="text-payment">Ovo</span></div>
+                    <div class=""><span class="text-payment">BNI</span></div>
                     <div class="">
                       <img
-                        :src="require('@/assets/ovo.png')"
+                        :src="require('@/assets/bank/bni.svg')"
                         class="img-payment"
                         alt=""
                       />
@@ -122,11 +214,34 @@
                   <hr />
                   <div class="payment">
                     <div class="">
-                      <span class="text-payment">Link Aja</span>
+                      <span class="text-payment">Mandiri</span>
                     </div>
                     <div class="">
                       <img
-                        :src="require('@/assets/linkaja.png')"
+                        :src="require('@/assets/bank/mandiri.svg')"
+                        class="img-payment"
+                        alt=""
+                      />
+                      <span
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 320 512"
+                          class="fontawesome-size"
+                        >
+                          <path
+                            d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"
+                          /></svg
+                      ></span>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="payment">
+                    <div class="">
+                      <span class="text-payment">Permata</span>
+                    </div>
+                    <div class="">
+                      <img
+                        :src="require('@/assets/bank/permata.svg')"
                         class="img-payment"
                         alt=""
                       />
@@ -171,13 +286,17 @@
                 data-bs-parent="#accordionExample3"
               >
                 <div class="accordion-body">
-                  <div class="payment">
+                  <div
+                    class="payment"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
                     <div class="">
                       <span class="text-payment">Credit Card</span>
                     </div>
                     <div class="">
                       <img
-                        :src="require('@/assets/ovo.png')"
+                        :src="require('@/assets/credit.svg')"
                         class="img-payment"
                         alt=""
                       />
@@ -201,7 +320,7 @@
                     </div>
                     <div class="">
                       <img
-                        :src="require('@/assets/linkaja.png')"
+                        :src="require('@/assets/credit.svg')"
                         class="img-payment"
                         alt=""
                       />
@@ -373,12 +492,50 @@
   color: #0b5d6f;
   font-weight: 700;
 }
+.button-modal-yes {
+  border-radius: 30px !important;
+  width: 100px;
+}
+.button-modal-no {
+  background: #ff4757 !important;
+  border: none !important;
+  border-radius: 30px !important;
+  width: 100px;
+}
+.modal-footer {
+  border: none !important;
+}
+.modal-content {
+  margin-top: 30% !important;
+  padding-bottom: 20px;
+}
+.modal-body {
+  color: #757575 !important;
+}
+.modal-header {
+  border: none !important;
+  /* margin: 0 auto; */
+}
+.modal-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
 <script>
 export default {
   name: "PaymentPage",
   props: {
     msg: String,
+  },
+  methods: {
+    copyURL() {
+      var Url = this.$refs.mylink;
+      Url.innerHTML = window.location.href;
+      console.log(Url.innerHTML);
+      Url.select();
+      document.execCommand("copy");
+    },
   },
 };
 </script>

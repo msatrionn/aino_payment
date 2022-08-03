@@ -2,7 +2,7 @@
   <div class="container wrapp">
     <div class="data">
       <div class="row">
-        <div class="col-md-6 pt-4 my-3">
+        <div class="col-md-6 my-3">
           <div class="card shadow bordershadow p-3 mt-4">
             <span class="method-text">QR Code</span>
             <div class="card p-3" id="card-summary-wrap">
@@ -30,7 +30,7 @@
             </span>
           </div>
         </div>
-        <div class="col-md-6 pt-4 my-3">
+        <div class="col-md-6 my-3">
           <div class="card shadow bordershadow p-3 mt-4">
             <span class="method-text">Payment Status</span>
             <div class="card p-3" id="card-summary-wrap">

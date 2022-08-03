@@ -2,7 +2,7 @@
   <div class="container wrapp">
     <div class="data">
       <div class="row">
-        <div class="col-md-6 pt-4 my-3">
+        <div class="col-md-6 my-3">
           <div class="card shadow bordershadow p-3 mt-4">
             <span class="method-text">Virtual Account</span>
             <div class="card p-3" id="card-summary-wrap">
@@ -14,7 +14,7 @@
                 <div class="col-md-6 text-amount">Mandiri</div>
                 <div class="col-md-6 text-amount text-end">
                   <img
-                    :src="require('@/assets/mandiri.svg')"
+                    :src="require('@/assets/bank/mandiri.svg')"
                     class="img-payment"
                     alt=""
                   />
@@ -27,10 +27,17 @@
               </div>
               <div class="row card-summary mt-2">
                 <div class="col-md-6 text-amount">
-                  1200 - 0012 - 0000 - 0010
+                  <input
+                    v-on:focus="$event.target.select()"
+                    ref="myinput"
+                    readonly
+                    :value="text"
+                    class="copyva"
+                  />
                 </div>
                 <div class="col-md-6 text-amount text-end">
                   <img
+                    @click="copy"
                     :src="require('@/assets/copy.png')"
                     class="img-payment"
                     alt=""
@@ -178,7 +185,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 pt-4 my-3">
+        <div class="col-md-6 my-3">
           <div class="card shadow bordershadow p-3 mt-4">
             <span class="method-text">Payment Status</span>
             <div class="card p-3" id="card-summary-wrap">
@@ -270,6 +277,26 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      text: "1200 - 0012 - 0000 - 0010",
+    };
+  },
+  name: "PaymentStatus",
+  props: {
+    msg: String,
+  },
+  methods: {
+    copy() {
+      this.$refs.myinput.focus();
+      document.execCommand("copy");
+    },
+  },
+};
+</script>
+
 <style>
 .wrapp {
   padding-top: 50px;
@@ -381,12 +408,10 @@
   border-radius: 30px;
   color: #0b5d6f;
 }
+.copyva {
+  background: none;
+  border: none;
+  font-weight: 600;
+  color: #0b5d6f;
+}
 </style>
-<script>
-export default {
-  name: "PaymentStatus",
-  props: {
-    msg: String,
-  },
-};
-</script>
