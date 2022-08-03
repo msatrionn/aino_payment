@@ -79,6 +79,7 @@
 }
 </style>
 <script>
+import { onMounted } from "vue";
 // import Payment from "./components/Payment.vue";
 // import HelloWorld from "./components/HelloWorld.vue";
 
@@ -93,6 +94,11 @@ export default {
     return {
       TwcLogo: require("./assets/twc.png"),
     };
+  },
+  setup() {
+    onMounted(() => {
+      console.log(localStorage.getItem("getData"));
+    });
   },
 };
 </script>

@@ -411,6 +411,56 @@
     </div>
   </div>
 </template>
+
+<script>
+// export default {
+//   name: "PaymentPage",
+//   props: {
+//     msg: String,
+//   },
+//   methods: {
+//     copyURL() {
+//       var Url = this.$refs.mylink;
+//       Url.innerHTML = window.location.href;
+//       console.log(Url.innerHTML);
+//       Url.select();
+//       document.execCommand("copy");
+//     },
+//   },
+// };
+import axios from "axios";
+import { onMounted, ref } from "vue";
+export default {
+  name: "PaymentPage",
+  methods: {},
+  setup() {
+    let total = ref(0);
+
+    function fetchDataPayment() {
+      axios
+        .get("http://172.20.10.2:8081/payment_data/", {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
+        .then((result) => {
+          total.value = result.data.data;
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
+
+    onMounted(() => {
+      fetchDataPayment();
+    });
+    return {
+      total,
+    };
+  },
+};
+</script>
 <style>
 .bordershadow {
   border: none !important;
@@ -522,20 +572,3 @@
   align-items: center;
 }
 </style>
-<script>
-export default {
-  name: "PaymentPage",
-  props: {
-    msg: String,
-  },
-  methods: {
-    copyURL() {
-      var Url = this.$refs.mylink;
-      Url.innerHTML = window.location.href;
-      console.log(Url.innerHTML);
-      Url.select();
-      document.execCommand("copy");
-    },
-  },
-};
-</script>
