@@ -57,9 +57,9 @@ export default {
       Object.keys(getData.value).forEach(function eachKey(key) {
         if (key in validData && check == true) {
           localStorage.setItem("getData", JSON.stringify(getData.value));
-          window.location.href = "http://localhost:8080/payment";
+          window.location.href = "http://localhost:8081/payment";
         } else {
-          window.location.href = "http://localhost:8080/forbidden";
+          window.location.href = "http://localhost:8081/forbidden";
         }
       });
     }

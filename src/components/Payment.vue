@@ -375,7 +375,9 @@
               <div class="row card-summary">
                 <div class="col-md-4">Total</div>
                 <div class="col-md-4 text-center">1x</div>
-                <div class="col-md-4 text-amount text-end">Rp 40</div>
+                <div class="col-md-4 text-amount text-end">
+                  Rp {{ showGetData.total_amount }}
+                </div>
               </div>
               <div class="row card-summary">
                 <div class="col-md-6">
@@ -393,7 +395,7 @@
                 <div class="col-md-4 text-center"></div>
                 <div class="col-md-4 text-amount text-end">
                   <span class="text-payment2"
-                    >- Rp {{ showGetData.trf_total_amount }}</span
+                    >- Rp {{ showGetData.total_amount }}</span
                   >
                 </div>
               </div>
@@ -425,13 +427,16 @@ export default {
     let showTarifData = ref([]);
     function showLocalStorageData() {
       const getData = JSON.parse(localStorage.getItem("getData"));
-      if (localStorage.getItem("infiniteScrollEnabled") === null) {
-        window.location.href = "http://localhost:8080/forbidden";
+      if (localStorage.getItem("getData") !== null) {
+        return true;
+      } else {
+        window.location.href = "http://localhost:8081/forbidden";
       }
       showGetData.value = getData;
       showTarifData.value = getData.tariff_data;
     }
     onMounted(() => {
+      console.log(showGetData);
       showLocalStorageData();
     });
     return {
