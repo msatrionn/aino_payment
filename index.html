@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <form id="formElem">
+            <input id="booking_number" placeholder="booking_number" type="text" name="booking_number" required></input>
+            <input id="total_amount" placeholder="total_amount" type="number" name="total_amount" required></input>
+            <input id="booking_note" placeholder="booking_note" type="text" name="booking_note" required></input>
+            <input id="customer_name" placeholder="customer_name" type="text" name="customer_name" required></input>
+            <input id="customer_email" placeholder="customer_email" type="text" name="customer_email" required></input>
+            <input id="customer_phone" placeholder="customer_phone" type="text" name="customer_phone" required></input>
+            <input id="count" placeholder="count" type="text" name="count"></input>
+            <br>
+            <br>
+            <br>
+            <div id="inputFormRow">
+                <input id="trf_name" placeholder="trf_name" type="text" name="trf_name[0]" required></input>
+                <input id="trf_qty" placeholder="trf_qty" type="number" name="trf_qty[0]" required></input>
+                <input id="trf_amount" placeholder="trf_amount" type="number" name="trf_amount[0]" required></input>
+                <input id="trf_total_amount" placeholder="trf_total_amount" type="number" name="trf_total_amount[0]" required></input>
+                <button id="removeRow" type="button" class="btn btn-danger" onclick="removedRow(0)">Remove</button>
+            </div>
+
+            <div id="newRow"></div>
+            <button id="addRow" type="button" class="btn btn-info">Add Row</button>
+            </div>
+            <br>
+            <br>
+            <br>
+            <input type="submit">
+        </form>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var ix=0;
+        var x=[]
+    $("#addRow").click(function (e) {
+        e.preventDefault()
+        ix++;
+        var html = '';
+        html += `<div id="inputFormRow${ix}">`;
+        html += `<input id="trf_name${ix}" placeholder="trf_name" type="text" name="trf_name[${ix}]" required></input>`
+        html += `<input id="trf_qty" placeholder="trf_qty" type="number" name="trf_qty[${ix}]" required></input>`
+        html += `<input id="trf_amount" placeholder="trf_amount" type="number" name="trf_amount[${ix}]" required></input>`
+        html += `<input id="trf_total_amount" placeholder="trf_total_amount" type="number" name="trf_total_amount[${ix}]" required></input>`
+        html += `<button id="removeRow" type="button" class="btn btn-danger" onClick="removedRow(${ix})" required>Remove</button>`;
+        html += '</div>';
+        $('#newRow').append(html);
+        $('#count').val(ix);
+        console.log(ix);
+        x.push(ix)
+    });
+    function removedRow(xx) {
+        console.log(xx);
+        let getCount = $('input[name=count]').val();
+        $("#count").val(getCount-1)
+        $(`#inputFormRow${xx}`).remove();
+        $('input[name=delt]').val(xx)
+    }
+
+    formElem.onsubmit = async (e) => {
+        e.preventDefault();
+        var form = document.querySelector("#formElem");
+        const looping = []
+        for (let index = 0; index <=x.length; index++) {
+            console.log(index);
+        set =  { 
+                    trf_name :$(`input[name="trf_name[${index}]"]`).val(),
+                    trf_qty :$(`input[name="trf_qty[${index}]"]`).val(),
+                    trf_amount :$(`input[name="trf_amount[${index}]"]`).val(),
+                    trf_total_amount :$(`input[name="trf_total_amount[${index}]"]`).val()
+                }
+        function cleans(objs) {
+            for (var propName in objs) {
+                if (objs[propName] === null || objs[propName] === undefined || objs[propName] === "" ) {
+                delete objs[propName];
+                }
+            }
+            return objs
+        }
+
+        looping.push(cleans(set))
+        }
+        datafilter = {
+            tariff_data:looping
+        }
+            function removedRow(xx) {
+                let getCount = $('input[name=count]').val();
+                $("#count").val(getCount-1)
+                $(`#inputFormRow${xx}`).remove();
+            }
+
+            let filtered = datafilter.tariff_data.filter(el => Object.keys(el).length)
+            filtered.map((item,index) => {
+                console.log(filtered[index].trf_id=index+1);
+            })
+        data={
+            booking_number : form.querySelector('input[name="booking_number"]').value,
+            total_amount : form.querySelector('input[name="total_amount"]').value,
+            booking_note : form.querySelector('input[name="booking_note"]').value,
+            customer_name : form.querySelector('input[name="customer_name"]').value,
+            customer_email : form.querySelector('input[name="customer_email"]').value,
+            customer_phone : form.querySelector('input[name="customer_phone"]').value,
+            tariff_data:filtered
+        }
+        console.log(filtered);
+        window.location.href = `http://localhost:8080/validation/${JSON.stringify(data)}`;
+    };
+    </script>
+</body>
+</html>

@@ -354,32 +354,35 @@
               <div class="row card-summary">
                 <div class="col-md-4">Booking Number</div>
                 <div class="col-md-4 text-center"></div>
-                <div class="col-md-4 text-amount text-end">QXy201X0</div>
+                <div class="col-md-4 text-amount text-end">
+                  {{ showGetData.booking_number }}
+                </div>
               </div>
             </div>
             <div class="card p-3" id="card-summary-wrap">
-              <div class="row card-summary">
-                <div class="col-md-4">Tiket perorangan TMII</div>
-                <div class="col-md-4 text-center">5x</div>
-                <div class="col-md-4 text-amount text-end">Rp 250.000</div>
-              </div>
-              <div class="row card-summary">
-                <div class="col-md-4">Tiket Mobil</div>
-                <div class="col-md-4 text-center">1x</div>
-                <div class="col-md-4 text-amount text-end">Rp 40.000</div>
+              <div
+                class="row card-summary"
+                v-for="item in showTarifData"
+                :key="item.trf_id"
+              >
+                <div class="col-md-4">{{ item.trf_name }}</div>
+                <div class="col-md-4 text-center">{{ item.trf_qty }} x</div>
+                <div class="col-md-4 text-amount text-end">
+                  Rp {{ item.trf_total_amount }}
+                </div>
               </div>
               <hr />
               <div class="row card-summary">
                 <div class="col-md-4">Total</div>
                 <div class="col-md-4 text-center">1x</div>
-                <div class="col-md-4 text-amount text-end">Rp 40.000</div>
+                <div class="col-md-4 text-amount text-end">Rp 40</div>
               </div>
               <div class="row card-summary">
                 <div class="col-md-6">
                   Voucher <span class="disc">(Disc 10%)</span>
                 </div>
                 <div class="col-md-6 text-amount text-end">
-                  <span class="disc">- Rp 30.000</span>
+                  <span class="disc">- Rp 30</span>
                 </div>
               </div>
               <hr />
@@ -389,7 +392,9 @@
                 </div>
                 <div class="col-md-4 text-center"></div>
                 <div class="col-md-4 text-amount text-end">
-                  <span class="text-payment2">- Rp 240.000</span>
+                  <span class="text-payment2"
+                    >- Rp {{ showGetData.trf_total_amount }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -413,54 +418,43 @@
 </template>
 
 <script>
-// export default {
-//   name: "PaymentPage",
-//   props: {
-//     msg: String,
-//   },
-//   methods: {
-//     copyURL() {
-//       var Url = this.$refs.mylink;
-//       Url.innerHTML = window.location.href;
-//       console.log(Url.innerHTML);
-//       Url.select();
-//       document.execCommand("copy");
-//     },
-//   },
-// };
-import axios from "axios";
-import { onMounted, ref } from "vue";
+import { ref, onMounted } from "vue";
 export default {
-  name: "PaymentPage",
-  methods: {},
   setup() {
-    let total = ref(0);
-
-    function fetchDataPayment() {
-      axios
-        .get("http://172.20.10.2:8081/payment_data/", {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
-        .then((result) => {
-          total.value = result.data.data;
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+    let showGetData = ref([]);
+    let showTarifData = ref([]);
+    function showLocalStorageData() {
+      const getData = JSON.parse(localStorage.getItem("getData"));
+      if (localStorage.getItem("infiniteScrollEnabled") === null) {
+        window.location.href = "http://localhost:8080/forbidden";
+      }
+      showGetData.value = getData;
+      showTarifData.value = getData.tariff_data;
     }
-
     onMounted(() => {
-      fetchDataPayment();
+      showLocalStorageData();
     });
     return {
-      total,
+      showGetData,
+      showTarifData,
     };
+  },
+  name: "PaymentPage",
+  props: {
+    msg: String,
+  },
+  methods: {
+    copyURL() {
+      var Url = this.$refs.mylink;
+      Url.innerHTML = window.location.href;
+      console.log(Url.innerHTML);
+      Url.select();
+      document.execCommand("copy");
+    },
   },
 };
 </script>
+
 <style>
 .bordershadow {
   border: none !important;
